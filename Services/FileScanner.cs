@@ -204,8 +204,8 @@ namespace DuplicateFileFinder.Services
                                         // 检查是否应该跳过此文件
                                         if (!ShouldIncludeFile(fileInfo, config))
                                         {
-                                            Interlocked.Increment(ref result.SkippedFiles);
-                                            Interlocked.Add(ref result.SkippedSize, fileInfo.Length);
+                                            result.SkippedFiles++;
+                                            result.SkippedSize += fileInfo.Length;
                                             continue;
                                         }
 
@@ -220,8 +220,8 @@ namespace DuplicateFileFinder.Services
                                         };
 
                                         files.Add(fileItem);
-                                        Interlocked.Increment(ref result.TotalFiles);
-                                        Interlocked.Add(ref result.TotalSize, fileInfo.Length);
+                                        result.TotalFiles++;
+                                        result.TotalSize += fileInfo.Length;
                                     }
                                     catch (Exception ex)
                                     {
