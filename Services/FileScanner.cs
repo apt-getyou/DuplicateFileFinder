@@ -204,8 +204,8 @@ namespace DuplicateFileFinder.Services
                                         // 检查是否应该跳过此文件
                                         if (!ShouldIncludeFile(fileInfo, config))
                                         {
-                                            long skippedCount = Interlocked.Increment(ref result.SkippedFiles);
-                                            long skippedSize = Interlocked.Add(ref result.SkippedSize, fileInfo.Length);
+                                            Interlocked.Increment(ref result.SkippedFiles);
+                                            Interlocked.Add(ref result.SkippedSize, fileInfo.Length);
                                             continue;
                                         }
 
@@ -220,8 +220,8 @@ namespace DuplicateFileFinder.Services
                                         };
 
                                         files.Add(fileItem);
-                                        long totalCount = Interlocked.Increment(ref result.TotalFiles);
-                                        long totalSize = Interlocked.Add(ref result.TotalSize, fileInfo.Length);
+                                        Interlocked.Increment(ref result.TotalFiles);
+                                        Interlocked.Add(ref result.TotalSize, fileInfo.Length);
                                     }
                                     catch (Exception ex)
                                     {
