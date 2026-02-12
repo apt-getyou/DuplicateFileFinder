@@ -342,3 +342,4 @@ namespace DuplicateFileFinder.Services
         public string Message { get; set; } = string.Empty;
     }
 }
+// Trigger rebuild
