@@ -49,7 +49,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#5A6268"/>
                 </Trigger>
-            </Style>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="SuccessButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
@@ -58,7 +58,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#218838"/>
                 </Trigger>
-            </Style>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
@@ -67,7 +67,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#C82333"/>
                 </Trigger>
-            </Style>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="CardStyle" TargetType="Border">
