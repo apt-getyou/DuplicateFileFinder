@@ -40,7 +40,7 @@
                     <Setter Property="Background" Value="#CCCCCC"/>
                     <Setter Property="Cursor" Value="Arrow"/>
                 </Trigger>
-            </Style>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
