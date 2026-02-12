@@ -1,0 +1,45 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore DuplicateFileFinder.csproj
+
+    - name: Build project
+      run: dotnet build DuplicateFileFinder.csproj --configuration Release --no-restore
+
+    - name: Check build output
+      run: |
+        if (Test-Path "bin\Release\net8.0-windows\DuplicateFileFinder.exe") {
+            Write-Host "✅ Build successful!"
+            Write-Host "Executable created:"
+            Get-Item "bin\Release\net8.0-windows\DuplicateFileFinder.exe" | Select-Object Name, Length, LastWriteTime
+        } else {
+            Write-Host "❌ Build failed - executable not found"
+            exit 1
+        }
+      shell: pwsh
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: duplicate-file-finder-win-x64
+        path: bin/Release/net8.0-windows/
+        retention-days: 30
