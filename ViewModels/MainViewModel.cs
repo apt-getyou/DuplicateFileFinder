@@ -164,19 +164,13 @@ namespace DuplicateFileFinder.ViewModels
 
         private void AddScanPath()
         {
-            var dialog = new System.Windows.Forms.FolderBrowserDialog
+            // TODO: 实现文件夹选择对话框
+            // 暂时使用固定路径进行测试
+            var testPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (!Config.ScanPaths.Contains(testPath))
             {
-                Description = "选择要扫描的文件夹",
-                ShowNewFolderButton = false
-            };
-
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (!Config.ScanPaths.Contains(dialog.SelectedPath))
-                {
-                    Config.ScanPaths.Add(dialog.SelectedPath);
-                    OnPropertyChanged(nameof(Config));
-                }
+                Config.ScanPaths.Add(testPath);
+                OnPropertyChanged(nameof(Config));
             }
         }
 
@@ -321,25 +315,13 @@ namespace DuplicateFileFinder.ViewModels
             if (SelectedGroup == null)
                 return;
 
-            var dialog = new System.Windows.Forms.FolderBrowserDialog
-            {
-                Description = "选择目标文件夹",
-                ShowNewFolderButton = true
-            };
-
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var operationResult = _operationService.MoveFiles(SelectedGroup, f => f.IsSelected, dialog.SelectedPath);
-
-                MessageBox.Show(
-                    $"操作完成！\n\n已移动: {operationResult.MovedCount} 个\n跳过: {operationResult.SkippedCount} 个\n错误: {operationResult.ErrorCount} 个\n释放空间: {FormatBytes(operationResult.FreedSpace)}",
-                    "移动完成",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-
-                // 刷新列表
-                DuplicateGroups.Remove(SelectedGroup);
-            }
+            // TODO: 实现文件夹选择对话框
+            // 暂时跳过移动操作
+            MessageBox.Show(
+                "文件夹选择功能待实现。请先使用删除功能。",
+                "功能待实现",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
         }
 
         private bool CanExportReport()
